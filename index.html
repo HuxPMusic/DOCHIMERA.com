@@ -11,16 +11,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- Favicons / PWA -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=3">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=3">
-  <link rel="icon" href="/favicon.ico?v=3" sizes="any">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#898eca">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=4">
+  <link rel="icon" href="/favicon.ico?v=4" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#6AFFC2">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="theme-color" content="#898eca" />
+  <meta name="theme-color" content="#6AFFC2" />
 
   <!-- Social -->
   <meta property="og:title" content="DOCHIMERA" />
+  <meta property="og:site_name" content="DOCHIMERA" />
   <meta property="og:description" content="A vocal synth group consisting of two sets of twins. Debut album DOCHIMERA, Vol. 1 released June 1, 2025." />
   <meta property="og:image" content="/assets/dochimera-logo.png" />
   <meta property="og:type" content="website" />
@@ -29,26 +30,22 @@
   <style>
     :root{
       --primary:#898eca;
-      --purple:#898eca;
-      --blue:#bcd0ff;
-      --pink:#f2dfff;
-      --gold:#ffe6a6;
+      --mint:#6AFFC2;
       --ink:#1a1a1a;
       --card:#ffffff;
       --font-body: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Helvetica, Arial, sans-serif;
       --font-ui: "Fredoka", "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Helvetica, Arial, sans-serif;
       --radius:12px; --shadow:0 4px 12px rgba(0,0,0,.15); --gap: clamp(.8rem, 1.6vw, 1.25rem);
-      --bubble-radius:26px; --bubble-border:4px;
     }
     html, body { height:100%; }
     *,*::before,*::after { box-sizing:border-box; }
     body{
       margin:0; font-family: var(--font-body); color:var(--ink);
-      background: #ffffff; /* white background as requested */
+      background: #ffffff;
       display:flex; flex-direction:column; min-height:100vh; text-rendering: optimizeLegibility;
     }
     h1,h2,h3,h4,h5,h6,.logo a,.hero-title{ font-family: var(--font-ui); }
-    :focus-visible{ outline:3px solid var(--primary); outline-offset:3px; border-radius:6px; }
+    :focus-visible{ outline:3px solid var(--mint); outline-offset:3px; border-radius:6px; }
 
     header.site-header{
       position:sticky; top:0; z-index:10;
@@ -67,7 +64,7 @@
       border: 2px solid rgba(0,0,0,.08);
     }
     nav[aria-label="Primary"] a:hover{ background: rgba(0,0,0,.03); }
-    nav[aria-label="Primary"] a[aria-current="page"]{ background: var(--primary); color:#fff; border-color: transparent; }
+    nav[aria-label="Primary"] a[aria-current="page"]{ background: var(--mint); color:#000; border-color: transparent; }
 
     main{
       width:min(1100px, 100%); margin:0 auto;
@@ -79,9 +76,28 @@
 
     .hero{ display:grid; gap:1rem; padding: clamp(1rem, 2vw, 1.5rem); align-items:center; }
     .hero .meta{ display:flex; flex-wrap:wrap; gap:.5rem 1rem; font-weight:700; }
-    .badge{ background: #fff; border-radius:999px; padding:.35rem .75rem; border: 2px solid rgba(0,0,0,.08); }
+    .badge{
+      /* light mint tint with white fallback */
+      background:#eafff6;
+      background: color-mix(in srgb, var(--mint) 22%, #fff 78%);
+      border-radius:999px;
+      padding:.35rem .75rem;
+      border: 2px solid var(--mint);
+      color:#073a2c; /* readable on mint */
+      box-shadow: 0 2px 0 rgba(0,0,0,.06);
+    }
     .aliases{ opacity:.8; }
     .hero img{ width:100%; max-width:900px; height:auto; border-radius:12px; }
+
+    /* Members */
+    .members{ padding: clamp(1rem, 2vw, 1.5rem); }
+    .member-grid{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns: repeat(1,1fr); gap:1rem; }
+    @media(min-width:560px){ .member-grid{ grid-template-columns: repeat(2, 1fr);} }
+    @media(min-width:900px){ .member-grid{ grid-template-columns: repeat(5, 1fr);} }
+    .member{ background:#fff; border-radius:16px; padding:1rem; text-align:center; border:2px solid rgba(0,0,0,.08); }
+    .member img{ width:120px; height:120px; object-fit:cover; border-radius:50%; background:#eee; display:block; margin:0 auto .5rem; border:3px solid rgba(0,0,0,.06); }
+    .member .name{ font-weight:800; }
+    .member .role{ font-weight:700; opacity:.75; }
 
     .discog{ padding: clamp(1rem, 2vw, 1.5rem); }
     .album{ display:grid; gap:1rem; align-items:start; }
@@ -99,7 +115,35 @@
     footer a:hover{ text-decoration:underline; text-underline-offset:2px; }
     .social-icons{ display:flex; flex-wrap:wrap; gap:.5rem 1rem; }
     @media(max-width:640px){ footer{ text-align:center; } .social-icons{ width:100%; justify-content:center; } }
-  </style>
+  
+    /* Accessible skip link: hidden until focused */
+    .sr-only{
+      position:absolute !important;
+      width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);
+      white-space:nowrap;border:0;
+    }
+    .sr-only:focus{
+      position:fixed !important; top:1rem; left:1rem;
+      width:auto;height:auto;margin:0;clip:auto;clip-path:none;white-space:normal;
+      padding:.6rem .8rem; border-radius:10px; z-index:9999;
+      background:#fff; color:#000; box-shadow:0 4px 12px rgba(0,0,0,.15);
+      outline:3px solid var(--mint); outline-offset:2px;
+    }
+
+
+    /* Mint-themed member badges */
+    .member img{ border:3px solid var(--mint); }
+    .member .role{
+      display:inline-block;
+      margin-top:.25rem;
+      padding:.25rem .6rem;
+      border-radius:999px;
+      background: var(--mint);
+      color:#003a2a; /* good contrast on mint */
+    }
+
+</style>
 </head>
 <body>
   <a class="sr-only" href="#main">Skip to content</a>
@@ -130,6 +174,38 @@
         “DOCHIMERA is a vocal synth group consisting of two sets of twins.”
         Members: <strong>HuxP</strong> (lead), <strong>VadaVadaV</strong> (lead), <strong>adipocere</strong> (member), <strong>HayBombYT</strong> (support), <strong>EGG0421</strong> (support).
       </p>
+    </section>
+
+    <!-- Members -->
+    <section class="card members" id="members" aria-labelledby="members-title">
+      <h2 id="members-title" class="hero-title">Members</h2>
+      <ul class="member-grid" role="list">
+        <li class="member">
+          <img src="https://mywikis-wiki-media.s3.us-central-1.wasabisys.com/huxp/HuxP.png" alt="HuxP" loading="lazy" decoding="async">
+          <div class="name">HuxP</div>
+          <div class="role">Lead Member</div>
+        </li>
+        <li class="member">
+          <img src="https://mywikis-wiki-media.s3.us-central-1.wasabisys.com/huxp/VadaVadaV.png" alt="VadaVadaV" loading="lazy" decoding="async">
+          <div class="name">VadaVadaV</div>
+          <div class="role">Lead Member</div>
+        </li>
+        <li class="member">
+          <img src="https://mywikis-wiki-media.s3.us-central-1.wasabisys.com/huxp/adipocere.png" alt="adipocere" loading="lazy" decoding="async">
+          <div class="name">adipocere</div>
+          <div class="role">Member</div>
+        </li>
+        <li class="member">
+          <img src="https://mywikis-wiki-media.s3.us-central-1.wasabisys.com/huxp/HayBombYT.png" alt="HayBombYT" loading="lazy" decoding="async">
+          <div class="name">HayBombYT</div>
+          <div class="role">Supporting Member</div>
+        </li>
+        <li class="member">
+          <img src="https://mywikis-wiki-media.s3.us-central-1.wasabisys.com/huxp/EGG0421_%28resized%29.png" alt="EGG0421" loading="lazy" decoding="async">
+          <div class="name">EGG0421</div>
+          <div class="role">Supporting Member</div>
+        </li>
+      </ul>
     </section>
 
     <!-- Discography -->
