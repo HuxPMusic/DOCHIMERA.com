@@ -11,10 +11,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- Favicons / PWA -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=4">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=4">
-  <link rel="icon" href="/favicon.ico?v=4" sizes="any">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=5">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=5">
+  <link rel="icon" href="/favicon.ico?v=5" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=5">
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#6AFFC2">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#6AFFC2" />
@@ -22,7 +22,7 @@
   <!-- Social -->
   <meta property="og:title" content="DOCHIMERA" />
   <meta property="og:site_name" content="DOCHIMERA" />
-  <meta property="og:description" content="A vocal synth group consisting of two sets of twins. Debut album DOCHIMERA, Vol. 1 released June 1, 2025." />
+  <meta property="og:description" content="A vocal synth group consisting of two sets of twins. Debut cover album: DOCHIMERA, Vol. 1 (June 1, 2025)." />
   <meta property="og:image" content="/assets/dochimera-logo.png" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -41,11 +41,25 @@
     *,*::before,*::after { box-sizing:border-box; }
     body{
       margin:0; font-family: var(--font-body); color:var(--ink);
-      background: #ffffff;
-      display:flex; flex-direction:column; min-height:100vh; text-rendering: optimizeLegibility;
+      background:#fff; display:flex; flex-direction:column; min-height:100vh;
+      text-rendering: optimizeLegibility;
     }
     h1,h2,h3,h4,h5,h6,.logo a,.hero-title{ font-family: var(--font-ui); }
     :focus-visible{ outline:3px solid var(--mint); outline-offset:3px; border-radius:6px; }
+
+    /* Skip link */
+    .sr-only{
+      position:absolute !important; width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);
+      white-space:nowrap;border:0;
+    }
+    .sr-only:focus{
+      position:fixed !important; top:1rem; left:1rem;
+      width:auto;height:auto;margin:0;clip:auto;clip-path:none;white-space:normal;
+      padding:.6rem .8rem; border-radius:10px; z-index:9999;
+      background:#fff; color:#000; box-shadow:0 4px 12px rgba(0,0,0,.15);
+      outline:3px solid var(--mint); outline-offset:2px;
+    }
 
     header.site-header{
       position:sticky; top:0; z-index:10;
@@ -56,15 +70,6 @@
     .logo{ display:flex; align-items:center; gap:.6rem; }
     .logo img{ height: clamp(36px, 4vw, 48px); width:auto; }
     .logo .wordmark{ font-weight:800; letter-spacing:.5px; }
-
-    nav[aria-label="Primary"]{ display:flex; gap:.5rem; flex-wrap:wrap; }
-    nav[aria-label="Primary"] a{
-      text-decoration:none; font-weight:700; color:#333; font-size:.96rem;
-      padding:.6rem .9rem; border-radius:999px; background:#fff;
-      border: 2px solid rgba(0,0,0,.08);
-    }
-    nav[aria-label="Primary"] a:hover{ background: rgba(0,0,0,.03); }
-    nav[aria-label="Primary"] a[aria-current="page"]{ background: var(--mint); color:#000; border-color: transparent; }
 
     main{
       width:min(1100px, 100%); margin:0 auto;
@@ -77,17 +82,12 @@
     .hero{ display:grid; gap:1rem; padding: clamp(1rem, 2vw, 1.5rem); align-items:center; }
     .hero .meta{ display:flex; flex-wrap:wrap; gap:.5rem 1rem; font-weight:700; }
     .badge{
-      /* light mint tint with white fallback */
       background:#eafff6;
       background: color-mix(in srgb, var(--mint) 22%, #fff 78%);
-      border-radius:999px;
-      padding:.35rem .75rem;
-      border: 2px solid var(--mint);
-      color:#073a2c; /* readable on mint */
+      border-radius:999px; padding:.35rem .75rem;
+      border:2px solid var(--mint); color:#073a2c;
       box-shadow: 0 2px 0 rgba(0,0,0,.06);
     }
-    .aliases{ opacity:.8; }
-    .hero img{ width:100%; max-width:900px; height:auto; border-radius:12px; }
 
     /* Members */
     .members{ padding: clamp(1rem, 2vw, 1.5rem); }
@@ -95,10 +95,21 @@
     @media(min-width:560px){ .member-grid{ grid-template-columns: repeat(2, 1fr);} }
     @media(min-width:900px){ .member-grid{ grid-template-columns: repeat(5, 1fr);} }
     .member{ background:#fff; border-radius:16px; padding:1rem; text-align:center; border:2px solid rgba(0,0,0,.08); }
-    .member img{ width:120px; height:120px; object-fit:cover; border-radius:50%; background:#eee; display:block; margin:0 auto .5rem; border:3px solid rgba(0,0,0,.06); }
+    .member img{ width:120px; height:120px; object-fit:cover; border-radius:50%; background:#eee; display:block; margin:0 auto .5rem; border:3px solid var(--mint); }
     .member .name{ font-weight:800; }
-    .member .role{ font-weight:700; opacity:.75; }
+    .member .role{ font-weight:700; opacity:.9; display:inline-block; margin-top:.25rem; padding:.25rem .6rem; border-radius:999px; background:var(--mint); color:#003a2a; }
 
+    /* Voicebanks */
+    .voices{ padding: clamp(1rem, 2vw, 1.5rem); }
+    .voices-grid{ list-style:none; margin:0; padding:0; display:grid; gap:1rem; grid-template-columns: 1fr; }
+    @media(min-width:720px){ .voices-grid{ grid-template-columns: 1fr 1fr; } }
+    .voice{ background:#fff; border-radius:16px; padding:1rem; border:2px solid rgba(0,0,0,.08); }
+    .voice img{ width:140px; height:140px; object-fit:cover; border-radius:14px; display:block; background:#eee; margin-bottom:.5rem; border:3px solid var(--mint); }
+    .voice .v-name{ font-weight:800; margin:.25rem 0 .5rem; }
+    .voice .v-meta{ list-style: none; padding:0; margin:0 0 .5rem; display:grid; gap:.25rem; font-weight:700; }
+    .voice .v-desc{ margin:0; }
+
+    /* Discography */
     .discog{ padding: clamp(1rem, 2vw, 1.5rem); }
     .album{ display:grid; gap:1rem; align-items:start; }
     @media(min-width:800px){ .album{ grid-template-columns: 280px 1fr; } }
@@ -115,65 +126,39 @@
     footer a:hover{ text-decoration:underline; text-underline-offset:2px; }
     .social-icons{ display:flex; flex-wrap:wrap; gap:.5rem 1rem; }
     @media(max-width:640px){ footer{ text-align:center; } .social-icons{ width:100%; justify-content:center; } }
-  
-    /* Accessible skip link: hidden until focused */
-    .sr-only{
-      position:absolute !important;
-      width:1px;height:1px;padding:0;margin:-1px;
-      overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);
-      white-space:nowrap;border:0;
-    }
-    .sr-only:focus{
-      position:fixed !important; top:1rem; left:1rem;
-      width:auto;height:auto;margin:0;clip:auto;clip-path:none;white-space:normal;
-      padding:.6rem .8rem; border-radius:10px; z-index:9999;
-      background:#fff; color:#000; box-shadow:0 4px 12px rgba(0,0,0,.15);
-      outline:3px solid var(--mint); outline-offset:2px;
-    }
-
-
-    /* Mint-themed member badges */
-    .member img{ border:3px solid var(--mint); }
-    .member .role{
-      display:inline-block;
-      margin-top:.25rem;
-      padding:.25rem .6rem;
-      border-radius:999px;
-      background: var(--mint);
-      color:#003a2a; /* good contrast on mint */
-    }
-
-</style>
+  </style>
 </head>
 <body>
   <a class="sr-only" href="#main">Skip to content</a>
 
   <header class="site-header" role="banner">
     <div class="logo">
-      <img src="/assets/dochimera-logo.png" alt="DOCHIMERA logo" decoding="async" fetchpriority="high">
+      <img src="/assets/dochimera-logo.png" alt="DOCHIMERA logo" decoding="async">
       <div class="wordmark">DOCHIMERA</div>
     </div>
-    <nav aria-label="Primary">
-      <a href="/" aria-current="page">Home</a>
-      <a href="https://huxpmusic.com" target="_blank" rel="noopener">HuxPMusic.com</a>
-    </nav>
   </header>
 
   <main id="main">
     <!-- Hero -->
     <section class="card hero" aria-labelledby="hero-title">
       <h1 id="hero-title" class="hero-title">DOCHIMERA</h1>
-      <img src="/assets/dochimera-logo.png" alt="DOCHIMERA emblem">
       <div class="meta">
         <span class="badge">Founded: December 17, 2023</span>
         <span class="badge">Label: DOCHIMERA Music</span>
-        <span class="badge aliases">Aliases: DOCHIMERA, ドチメラ</span>
+        <span class="badge">Aliases: DOCHIMERA, ドチメラ</span>
         <span class="badge">Genres: J‑Pop · Pop · Rock</span>
       </div>
-      <p style="margin:0; font-weight:600;">
-        “DOCHIMERA is a vocal synth group consisting of two sets of twins.”
-        Members: <strong>HuxP</strong> (lead), <strong>VadaVadaV</strong> (lead), <strong>adipocere</strong> (member), <strong>HayBombYT</strong> (support), <strong>EGG0421</strong> (support).
-      </p>
+      <p>“DOCHIMERA is a vocal synth group consisting of two sets of twins.”</p>
+    </section>
+
+    <!-- About -->
+    <section class="card about" id="about-group" aria-labelledby="about-title">
+      <h2 id="about-title" class="hero-title">About the Group</h2>
+      <div class="about-body">
+        <p><strong>DOCHIMERA</strong> is a collaborative vocal‑synth group formed on December 17, 2023. Described by the members as “a vocal synth group consisting of two sets of twins,” the project brings together producers and supporting artists to explore bright, melody‑forward arrangements that bridge <em>J‑Pop</em>, <em>Pop</em>, and <em>Rock</em>.</p>
+        <p>After early experiments and cross‑collaboration in 2024, the group released its debut cover album, <em>DOCHIMERA, Vol. 1</em>, on June 1, 2025. The seven‑track set curates fan‑favorite covers with a consistent pop sensibility, highlighting harmonic “twin” pairings and a shared arrangement style.</p>
+        <p>The project’s contributors handle arrangement, vocals, mixing, and art direction across releases. In addition to the core producers and supporting members, DOCHIMERA maintains in‑house UTAU voicebanks that appear in recordings and performance edits, expanding the group’s tonal palette and character‑driven storytelling.</p>
+      </div>
     </section>
 
     <!-- Members -->
@@ -208,6 +193,33 @@
       </ul>
     </section>
 
+    <!-- Voicebanks -->
+    <section class="card voices" id="voicebanks" aria-labelledby="voices-title">
+      <h2 id="voices-title" class="hero-title">Voicebanks</h2>
+      <ul class="voices-grid" role="list">
+        <li class="voice">
+          <img src="https://vocadb.net/Artist/Picture/162151" alt="七虹アリスタ (Nanaka Arista)" loading="lazy" decoding="async">
+          <div class="v-name">七虹アリスタ (Nanaka Arista)</div>
+          <ul class="v-meta">
+            <li><strong>Birthday:</strong> September 2</li>
+            <li><strong>Engine:</strong> One‑pitch VCV</li>
+          </ul>
+          <p class="v-desc">Her name translates to “Seven Rainbows Arista.” “Arista” references the brightest star in Virgo, associated with a set of seven.</p>
+        </li>
+        <li class="voice">
+          <img src="https://vocadb.net/Artist/Picture/169070" alt="牢人ポラリス (Ronin Polaris)" loading="lazy" decoding="async">
+          <div class="v-name">牢人ポラリス (Ronin Polaris)</div>
+          <ul class="v-meta">
+            <li><strong>Birthday:</strong> September 2</li>
+            <li><strong>Engine:</strong> Single‑pitch VCV (more pitches planned); Single‑pitch CV (low quality)</li>
+            <li><strong>Pronouns:</strong> she/he</li>
+            <li><strong>Illustration:</strong> <a href="https://x.com/ronrumko" target="_blank" rel="noopener">ron.rumko</a></li>
+          </ul>
+          <p class="v-desc"><em>“Ronin”</em> references Kanaria’s “Envy Baby” usage (best approximated as “clown” or “pawn”). <em>“Polaris”</em> is the North Star—brightest in Ursa Minor. Known as an alternate persona with distinct, English‑leaning enunciation, Polaris enjoys time with other UTAU friends and soft drinks. In development since January 2024; public release at an undisclosed date.</p>
+        </li>
+      </ul>
+    </section>
+
     <!-- Discography -->
     <section class="card discog" aria-labelledby="discog-title">
       <h2 id="discog-title" class="hero-title">Discography</h2>
@@ -234,8 +246,8 @@
       DOCHIMERA © 2025<br>
       <a href="mailto:huxpmusic@gmail.com">huxpmusic@gmail.com</a>
     </div>
-    <div class="social-icons" aria-label="Social links">
-      <a href="https://huxpmusic.com" target="_blank" rel="noopener" aria-label="HuxPMusic">HuxPMusic</a>
+    <div class="social-icons" aria-label="Links">
+      <a href="https://huxpmusic.com" target="_blank" rel="noopener">HuxPMusic</a>
     </div>
   </footer>
 </body>
