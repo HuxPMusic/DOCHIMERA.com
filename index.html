@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>DOCHIMERA</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicons / PWA -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#898eca">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#898eca" />
+
+  <!-- Social -->
+  <meta property="og:title" content="DOCHIMERA" />
+  <meta property="og:description" content="A vocal synth group consisting of two sets of twins. Debut album DOCHIMERA, Vol. 1 released June 1, 2025." />
+  <meta property="og:image" content="/assets/DOCHIMERA - group photo (2025).png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Performance hints -->
+  <link rel="preconnect" href="https://upload.wikimedia.org" crossorigin>
+  <link rel="preload" as="image" href="/assets/DOCHIMERA - group photo (2025).png" imagesrcset="/assets/DOCHIMERA - group photo (2025).png" imagesizes="100vw">
+
+  <style>
+    :root{
+      --primary:#898eca;
+      --purple:#898eca;
+      --blue:#bcd0ff;
+      --pink:#f2dfff;
+      --gold:#ffe6a6;
+      --ink:#1a1a1a;
+      --card:#ffffff;
+
+      --font-body: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Helvetica, Arial, sans-serif;
+      --font-ui: "Fredoka", "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Helvetica, Arial, sans-serif;
+
+      --radius:12px;
+      --shadow:0 4px 12px rgba(0,0,0,.15);
+      --gap: clamp(.8rem, 1.6vw, 1.25rem);
+      --bubble-radius:26px;
+      --bubble-border:4px;
+    }
+
+    html, body { height:100%; }
+    *,*::before,*::after { box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: var(--font-body);
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%, var(--pink) 0 12%, transparent 13% 100%),
+        radial-gradient(circle at 80% 25%, var(--blue) 0 14%, transparent 15% 100%),
+        radial-gradient(circle at 15% 80%, #dff7b2 0 12%, transparent 13% 100%),
+        linear-gradient(180deg, #fff 0%, #fff8fe 80%);
+      background-attachment: fixed;
+      display:flex; flex-direction:column; min-height:100vh;
+      text-rendering: optimizeLegibility;
+    }
+    h1,h2,h3,h4,h5,h6,.logo a,.hero-title{ font-family: var(--font-ui); }
+    :focus-visible{ outline:3px solid var(--primary); outline-offset:3px; border-radius:6px; }
+
+    /* Header */
+    header.site-header{
+      position:sticky; top:0; z-index:10;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+      padding:.75rem clamp(1rem, 3vw, 2rem);
+      background: linear-gradient(180deg, #fff 0%, #fff8fe 100%);
+      border-radius: var(--bubble-radius);
+      border: var(--bubble-border) solid #00000010;
+      box-shadow: 0 2px 6px rgba(0,0,0,.08);
+      backdrop-filter:saturate(1.2);
+    }
+    .logo{ display:flex; align-items:center; gap:.6rem; }
+    .logo img{ height: clamp(36px, 4vw, 48px); width:auto; }
+    .logo .wordmark{ font-weight:800; letter-spacing:.5px; }
+
+    nav[aria-label="Primary"]{ display:flex; gap:.5rem; flex-wrap:wrap; }
+    nav[aria-label="Primary"] a{
+      text-decoration:none; font-weight:700; color:#333; font-size:.96rem;
+      padding:.6rem .9rem; border-radius:999px; background:#fff;
+      border: var(--bubble-border) solid #00000010; box-shadow: 0 3px 0 #00000010;
+    }
+    nav[aria-label="Primary"] a:hover{ transform: translateY(-1px); }
+    nav[aria-label="Primary"] a[aria-current="page"]{ background: var(--primary); color:#fff; }
+
+    main{
+      width:min(1200px, 100%); margin:0 auto;
+      padding: clamp(1rem, 3vw, 2rem);
+      display:grid; grid-template-columns: 1fr; gap: var(--gap);
+      flex:1 0 auto; min-height: 0;
+    }
+    .card{ background:var(--card); color:#111; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; }
+
+    /* Hero */
+    .hero{ display:grid; gap:1rem; padding: clamp(1rem, 2vw, 1.5rem); align-items:center; }
+    .hero img{ width:100%; max-width:900px; height:auto; border-radius:12px; }
+    .hero .meta{ display:flex; flex-wrap:wrap; gap:.5rem 1rem; font-weight:700; }
+    .badge{ background: #fff; border-radius:999px; padding:.35rem .75rem; border: var(--bubble-border) solid #00000010; box-shadow: 0 3px 0 #00000010;}
+    .aliases{ opacity:.8; }
+
+    /* Members */
+    .members{ padding: clamp(1rem, 2vw, 1.5rem); }
+    .member-list{ display:flex; flex-wrap:wrap; gap:.5rem .75rem; }
+    .member-list .chip{ background:#fff; border-radius:999px; padding:.4rem .75rem; font-weight:800; border:2px solid rgba(0,0,0,.05); }
+
+    /* Discography */
+    .discog{ padding: clamp(1rem, 2vw, 1.5rem); }
+    .album{ display:grid; gap:1rem; align-items:start; }
+    @media(min-width:800px){ .album{ grid-template-columns: 280px 1fr; } }
+    .album .covers { display:flex; gap:.5rem; flex-wrap:wrap; }
+    .album .covers img{ width:120px; height:120px; border-radius:12px; object-fit:cover; background:#eee; }
+    .album .facts{ display:grid; gap:.25rem; font-weight:700; }
+    .album .facts .label{ opacity:.7; font-weight:600; }
+
+    /* Footer */
+    footer{
+      margin-top:auto;
+      background:#fff;
+      border-top:4px solid rgba(0,0,0,.06);
+      padding: clamp(1rem, 2.5vw, 2rem);
+      font-size:.95rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.5rem 1rem;
+      color: var(--ink);
+    }
+    footer a{ color:var(--ink); text-decoration:none; font-weight:700; }
+    footer a:hover{ text-decoration:underline; text-underline-offset:2px; }
+    .social-icons{ display:flex; flex-wrap:wrap; gap:.5rem 1rem; }
+    @media(max-width:640px){
+      footer{ text-align:center; }
+      .social-icons{ width:100%; justify-content:center; }
+    }
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="logo">
+      <img src="/assets/dochimera-logo.png" alt="DOCHIMERA icon" decoding="async" fetchpriority="high">
+      <div class="wordmark">DOCHIMERA</div>
+    </div>
+    <nav aria-label="Primary">
+      <a href="/" aria-current="page">home</a>
+      <a href="https://x.com/dochimera" target="_blank" rel="noopener">X (Twitter)</a>
+      <a href="https://youtube.com/@dochimera" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://dochimera.com" target="_blank" rel="noopener">dochimera.com</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="card hero" aria-labelledby="hero-title">
+      <h1 id="hero-title" class="hero-title">DOCHIMERA</h1>
+      <img src="/assets/DOCHIMERA - group photo (2025).png" alt="DOCHIMERA group photo">
+      <div class="meta">
+        <span class="badge">Founded: December 17, 2023</span>
+        <span class="badge">Label: DOCHIMERA Music</span>
+        <span class="badge aliases">Aliases: DOCHIMERA, ドチメラ</span>
+        <span class="badge">Genres: J‑Pop · Pop · Rock</span>
+      </div>
+      <p style="margin:0; font-weight:600;">
+        “DOCHIMERA is a vocal synth group consisting of two sets of twins.”
+        Members: <strong>HuxP</strong> (lead), <strong>VadaVadaV</strong> (lead), <strong>adipocere</strong> (member), <strong>HayBombYT</strong> (support), <strong>EGG0421</strong> (support).
+      </p>
+    </section>
+
+    <!-- Discography -->
+    <section class="card discog" aria-labelledby="discog-title">
+      <h2 id="discog-title" class="hero-title">Discography</h2>
+      <div class="album">
+        <div class="covers">
+          <img src="https://mywikis-wiki-media.s3.us-central-1.wasabisys.com/huxp/DOCHIMERA%2C_Vol._1.png" alt="DOCHIMERA, Vol. 1 cover">
+          <img src="https://mywikis-wiki-media.s3.us-central-1.wasabisys.com/huxp/DOCHIMERA%2C_Vol._1_-_Scrapped_cover.png" alt="DOCHIMERA, Vol. 1 scrapped cover">
+        </div>
+        <div class="facts">
+          <div><span class="label">Title:</span> <strong>DOCHIMERA, Vol. 1</strong> <em>(cover album)</em></div>
+          <div><span class="label">Released:</span> June 1, 2025</div>
+          <div><span class="label">Tracks:</span> 7</div>
+          <div class="label" style="margin-top:.5rem;">References:</div>
+          <div>
+            <a href="https://last.fm/music/DOCHIMERA" target="_blank" rel="noopener">Last.fm</a> ·
+            <a href="https://musicbrainz.org/artist/9005cd9a-d722-452f-b0af-ce4c61a4e853" target="_blank" rel="noopener">MusicBrainz</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div>
+      DOCHIMERA © 2025<br>
+      <a href="mailto:info@dochimera.com">info@dochimera.com</a>
+    </div>
+    <div class="social-icons" aria-label="Social links">
+      <a href="https://x.com/dochimera" target="_blank" rel="noopener" aria-label="X">X (Twitter)</a>
+      <a href="https://youtube.com/@dochimera" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
+    </div>
+  </footer>
+</body>
+</html>
